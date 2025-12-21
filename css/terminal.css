@@ -1,0 +1,70 @@
+body {
+    background: #050f08;
+    color: #39ff14;
+    font-family: Consolas, monospace;
+    margin: 0;
+    height: 100vh;
+}
+
+#terminal {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    height: 100vh;
+    box-sizing: border-box;
+    overflow-y: auto;
+    font-size: 16px;
+}
+
+pre {
+    margin: 0;
+    white-space: pre-wrap;
+    text-shadow: 0 0 8px rgba(57, 255, 20, 0.4);
+}
+
+#input-line {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: transparent;
+    border: none;
+    color: #39ff14;
+    outline: none;
+    width: 800px;
+    max-width: 90%;
+    font-size: 16px;
+    line-height: 1.2;
+    appearance: none;
+}
+
+#cmd {
+    background: transparent;
+    border: none;
+    color: #39ff14;
+    outline: none;
+    flex: 1;
+    font-size: 16px;
+}
+
+/* CONTENT AREA (still vibrant!) */
+#content {
+    margin-top: 20px;
+}
+
+#content img,
+#content video {
+    max-width: 100%;
+    margin-top: 10px;
+    border: 1px solid #39ff14;
+}
+
+.option {
+    cursor: pointer;
+}
+
+.option:hover {
+    text-decoration: underline;
+}
+
+
