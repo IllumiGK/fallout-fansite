@@ -2,7 +2,7 @@ body {
     background: #050f08;
     color: #39ff14;
     font-family: 'Consolas', 'Courier New', monospace;
-    font-size: 32px;
+    font-size: 30px;
     margin: 0;
     height: 100vh;
 }
@@ -19,8 +19,8 @@ body {
 
 #boot-input {
     position: absolute;
-    bottom: 20px;
-    left: 20px;
+    bottom: 60px;
+    left: 22px;
     right: 20px;
     background: transparent;
     border: none;

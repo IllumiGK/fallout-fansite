@@ -40,7 +40,11 @@ ${Object.keys(s.options || {}).map(x => `[ > ${capitaliseWords(x)}]`).join("\n")
 
     if (s.contentKey && pageCont) {
         textBlock = pageCont.find(x => x.type === "text")
-        content.textContent = textBlock.text;
+        videoBlock = pageCont.find(x => x.type === "video")
+        content.textContent = [
+            videoBlock.src,
+            textBlock.text
+        ].join("\n\n");
     
     }
 
@@ -82,7 +86,8 @@ function makeOptionsClickable() {
     // Instead of clearing the screen, just find option lines
     const lines = screenEl.textContent.split("\n");
 
-   screenEl.innerHTML = lines.map(line => {
+
+    screenEl.innerHTML = lines.map(line => {
         const trimmed = line.trim();
 
         const newLine = trimmed
@@ -100,8 +105,6 @@ function makeOptionsClickable() {
             return line + "\n";
         }
     }).join("");
-
-
 
 
     document.querySelectorAll(".option").forEach(el => {
