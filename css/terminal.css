@@ -1,53 +1,40 @@
 body {
     background: #050f08;
     color: #39ff14;
-    font-family: Consolas, monospace;
+    font-family: 'Consolas', 'Courier New', monospace;
+    font-size: 32px;
     margin: 0;
     height: 100vh;
 }
 
 #terminal {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 20px;
+    position: relative;
+    max-width: 70%;
     height: 100vh;
+    padding: 20px;
     box-sizing: border-box;
-    overflow-y: auto;
-    font-size: 16px;
-}
-
-pre {
-    margin: 0;
-    white-space: pre-wrap;
+    margin-left: 5%;
     text-shadow: 0 0 8px rgba(57, 255, 20, 0.4);
 }
 
-#input-line {
+#terminal-input {
     position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
     background: transparent;
     border: none;
-    color: #39ff14;
     outline: none;
-    width: 800px;
-    max-width: 90%;
-    font-size: 16px;
     line-height: 1.2;
-    appearance: none;
+    white-space: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none; 
+    font: inherit;
+    color: inherit;
+    text-shadow: inherit;
 }
 
-#cmd {
-    background: transparent;
-    border: none;
-    color: #39ff14;
-    outline: none;
-    flex: 1;
-    font-size: 16px;
-}
-
-/* CONTENT AREA (still vibrant!) */
+/* CONTENT AREA */
 #content {
     margin-top: 20px;
 }

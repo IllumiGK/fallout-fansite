@@ -1,14 +1,15 @@
 const screens = {
     main: {
         header: [
-            "VAULT ARCHIVE TERMINAL",
-            "CLI MODE ACTIVE",
-            "TYPE 'help' FOR COMMAND LIST"
+            "Vault Archive Terminal",
+            "CLI Mode Active..",
+            "",
+            "Type 'Help' For Command List"
         ],
         options: {
-            "Fallout Lore": "lore",
-            "Mod Listings": "mods",
-            "Radio": "radio"
+            "fallout lore": "lore",
+            "mod listings": "mods",
+            "radio": "radio"
         }
     },
 
@@ -18,8 +19,19 @@ const screens = {
         ],
         options: {
             "2077": "lore-2077",
-            "Full Timeline": "lore-full",
+            "full timeline": "lore-full",
             "back": "main"
+        }
+    },
+
+    lore_2077: {
+        header: [
+            "2077 - The Great War"
+        ],
+        contentKey:
+            "lore_2077",
+        options: {
+            "back": "lore"
         }
     }
 };
