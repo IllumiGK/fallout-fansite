@@ -21,7 +21,7 @@ const lines = [
 let i = 0;
 
 function typeLine() {
-    text = lines.join("\n");
+    let text = lines.join("\n");
     if (i < text.length) {
         bootText.textContent += text[i];
         i++;

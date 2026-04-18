@@ -1,8 +1,15 @@
+// ====================
+// DOM REFERENCES (HTML elements)
+// ====================
 const screenEl = document.getElementById("screen");
 const input = document.getElementById("terminal-input");
 const content = document.getElementById("content");
 const statusBar = document.getElementById("terminal-status");
 
+
+// ====================
+// STATE (data that changes during runtime)
+// ====================
 let currentScreen = "main";
 let isTyping = false;
 
@@ -13,9 +20,11 @@ const state = {
 }
 
 
-// RENDERING LAYER + NAVIGATION LAYER:
+/// ====================
+// RENDERING (controls what is shown on screen)
+// ====================
 function renderScreen(id) {
-    if (state.entries !== 0) state.entries = 0;
+    
     if (isTyping) return;
 
     const s = screens[id];
@@ -36,15 +45,15 @@ ${Object.keys(s.options || {}).map(x => `[ > ${capitaliseWords(x)}]`).join("\n")
 
     screenEl.textContent = headerBlock;
     
-    pageCont = contents[s.contentKey];
+    let pageCont = contents[s.contentKey];
 
     if (s.contentKey && pageCont) {
-        textBlock = pageCont.find(x => x.type === "text")
-        videoBlock = pageCont.find(x => x.type === "video")
+        let textBlock = pageCont.find(x => x.type === "text")
+        let videoBlock = pageCont.find(x => x.type === "video")
         content.textContent = [
             videoBlock.src,
             textBlock.text
-        ].join("\n\n");
+        ].join("\n\n"); // creates a line of space between video and text
     
     }
 
@@ -56,7 +65,10 @@ ${Object.keys(s.options || {}).map(x => `[ > ${capitaliseWords(x)}]`).join("\n")
 
 }
 
-// NAVIGATION LAYER:
+
+// ====================
+// NAVIGATION / INPUT (user interactions)
+// ====================
 // Makes CLI Navigation + Tracks Entries
 input.addEventListener("keydown", (e) => {
     if (e.key !== "Enter" || isTyping) return;
@@ -115,7 +127,16 @@ function makeOptionsClickable() {
     });
 }
 
-// Shows Help Prompts For CLI Navigation
+
+// ====================
+// UI FUNCTIONS (small UI updates)
+// ====================
+// Renders Status Bar
+function renderStatus() {
+    statusBar.textContent =
+    `STATUS: ${state.status} | ENTRIES: ${state.entries} | MODE: ${state.mode}`;
+}
+// Shows/Renders Help Prompts For CLI Navigation
 function showHelp() {
     screenEl.textContent +=
         `
@@ -124,7 +145,10 @@ function showHelp() {
     > HELP`;
 }
 
-// TYPING ENGINE:
+
+// ====================
+// UTILITIES (reusable helpers)
+// ====================
 // Types text out letter by letter
 function typeText({element, text, speed, onComplete = () => { }, onChar = () => { }}) {
     let i = 0;
@@ -152,13 +176,11 @@ function capitaliseWords(str) {
         .join(" "); // join back into a string
 }
 
-// STATUS BAR:
-function renderStatus() {
-    statusBar.textContent =
-    `STATUS: ${state.status} | ENTRIES: ${state.entries} | MODE: ${state.mode}`;
-}
 
-// RUN:
+
+// ====================
+// INIT (runs when page loads)
+// ====================
 renderScreen("main");
 input.focus();
 

@@ -1,4 +1,5 @@
 const contents = {
+    // Fallout Lore Content Branch
     "lore_2077": [
         {
             type: "video",
