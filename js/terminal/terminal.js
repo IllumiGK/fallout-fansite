@@ -56,94 +56,7 @@ const commands = {
 }
 
 
-// ==================
-// RADIO
-// ==================
-const radio = {
-    current: null,
-    isPlaying: false,
 
-    stations: {
-        diamond_city: "PLxprHD0XC6ct27PHzErvjgfExoHXaTr0s",
-        galaxy_news: "PLxprHD0XC6cvYi0OQsn7Fbbv_vHWcCKye"
-    },
-
-    play(station) {
-        if (!window.YT || !YT.Player) {
-            console.error("YouTube API not ready yet");
-            return;
-        }
-
-        this.current = station;
-        this.isPlaying = true;
-
-        createRadioOverlay(this.stations[station]);
-    },
-
-    stop() {
-        this.isPlaying = false;
-        removeRadioOverlay();
-        radioPlayer = null;
-    },
-
-    setVolume(value) {
-        if (radioPlayer) {
-            radioPlayer.setVolume(value);
-        }
-    },
-
-    pause() {
-        if (radioPlayer) {
-            radioPlayer.pauseVideo();
-        }
-    }
-};
-
-let radioPlayer;
-
-function createRadioOverlay(playlistId) {
-    removeRadioOverlay();
-
-    const container = document.createElement("div");
-    container.id = "radio-overlay";
-
-    const playerDiv = document.createElement("div");
-    playerDiv.id = "radio-player";
-
-    const controls = document.createElement("div");
-    controls.innerHTML = `
-        <button id="radio-stop">Stop</button>
-        <button id="radio-volume-down">Volume -</button>
-    `;
-
-    container.appendChild(playerDiv);
-    container.appendChild(controls);
-    document.body.appendChild(container);
-
-    // bind AFTER creation (correct)
-    document.getElementById("radio-stop").onclick = () => radio.stop();
-    document.getElementById("radio-volume-down").onclick = () => radio.setVolume(20);
-
-    radioPlayer = new YT.Player("radio-player", {
-        height: "200",
-        width: "320",
-        playerVars: {
-            listType: "playlist",
-            list: playlistId,
-            autoplay: 1
-        },
-        events: {
-            onReady: (event) => {
-                event.target.setVolume(30);
-            }
-        }
-    });
-}
-
-function removeRadioOverlay() {
-    const el = document.getElementById("radio-overlay");
-    if (el) el.remove();
-}
 
 // ====================
 // RENDERING (controls what is shown on screen) (* = action flow)
@@ -311,6 +224,96 @@ function showHelp() {
         `COMMANDS: > SELECT [option], > CLEAR`;
 }
 
+
+// ==================
+// RADIO
+// ==================
+const radio = {
+    current: null,
+    isPlaying: false,
+
+    stations: {
+        diamond_city: "PLxprHD0XC6ct27PHzErvjgfExoHXaTr0s",
+        galaxy_news: "PLxprHD0XC6cvYi0OQsn7Fbbv_vHWcCKye"
+    },
+
+    play(station) {
+        if (!window.YT || !YT.Player) {
+            console.error("YouTube API not ready yet");
+            return;
+        }
+
+        this.current = station;
+        this.isPlaying = true;
+
+        createRadioOverlay(this.stations[station]);
+    },
+
+    stop() {
+        this.isPlaying = false;
+        removeRadioOverlay();
+        radioPlayer = null;
+    },
+
+    setVolume(value) {
+        if (radioPlayer) {
+            radioPlayer.setVolume(value);
+        }
+    },
+
+    pause() {
+        if (radioPlayer) {
+            radioPlayer.pauseVideo();
+        }
+    }
+};
+
+
+let radioPlayer;
+
+function createRadioOverlay(playlistId) {
+    removeRadioOverlay();
+
+    const container = document.createElement("div");
+    container.id = "radio-overlay";
+
+    const playerDiv = document.createElement("div");
+    playerDiv.id = "radio-player";
+
+    const controls = document.createElement("div");
+    controls.innerHTML = `
+        <button id="radio-stop">Stop</button>
+        <button id="radio-volume-down">Volume -</button>
+    `;
+
+    container.appendChild(playerDiv);
+    container.appendChild(controls);
+    document.body.appendChild(container);
+
+    // bind AFTER creation (correct)
+    document.getElementById("radio-stop").onclick = () => radio.stop();
+    document.getElementById("radio-volume-down").onclick = () => radio.setVolume(20);
+
+    radioPlayer = new YT.Player("radio-player", {
+        height: "200",
+        width: "320",
+        playerVars: {
+            listType: "playlist",
+            list: playlistId,
+            autoplay: 1
+        },
+        events: {
+            onReady: (event) => {
+                event.target.setVolume(30);
+            }
+        }
+    });
+}
+
+function removeRadioOverlay() {
+    const el = document.getElementById("radio-overlay");
+    if (el) el.remove();
+}
 
 // ====================
 // UTILITIES (reusable helpers)
