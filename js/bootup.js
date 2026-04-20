@@ -1,12 +1,21 @@
+
+// ====================
+// DOM REFERENCES
+// ====================
 const bootText = document.getElementById("boot-text");
 const input = document.getElementById("boot-input");
-const modeSelect = document.getElementById("mode-select");
+
+
+// ====================
+// STATE
+// ====================
+let i = 0;
 
 const lines = [
     "ROBCO Industries (TM) Unified Operating System",
     "Copyright 2075-2077 ROBCO",
     "",
-    "Inititalising Archive Terminal...",
+    "Initialising Archive Terminal...",
     "MEMORY CHECK: OK",
     "NETWORK STATUS: Online",
     "",
@@ -18,34 +27,61 @@ const lines = [
     "",
 ];
 
-let i = 0;
 
-function typeLine() {
-    let text = lines.join("\n");
+// ====================
+// BOOT SEQUENCE
+// ====================
+function typeBootSequence() {
+    const text = lines.join("\n");
+
     if (i < text.length) {
         bootText.textContent += text[i];
         i++;
-        setTimeout(typeLine, 15);
+        setTimeout(typeBootSequence, 15);
     } else {
-        modeSelect.hidden = false;
         input.focus();
     }
 }
 
-typeLine();
 
-input.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
+// ====================
+// INPUT HANDLING
+// ====================
+function setupBootInput() {
+    input.addEventListener("keydown", (e) => {
+        if (e.key !== "Enter") return;
+
         const value = input.value.trim();
+
         if (value === "1") {
-            localStorage.setItem("mode", "cli");
-            window.location.href = "terminal.html";
+            navigateTo("terminal.html", "cli");
         }
-        else if (value === "2") {
-            localStorage.setItem("mode", "gui");
-            window.location.href = "pipboy.html";
+
+        if (value === "2") {
+            navigateTo("pipboy.html", "gui");
         }
-        // else: just ignore invalid input
+
         input.value = "";
-    }
-});
+    });
+}
+
+
+// ====================
+// NAVIGATION
+// ====================
+function navigateTo(page, mode) {
+    localStorage.setItem("mode", mode);
+    window.location.href = page;
+}
+
+
+// ====================
+// INIT
+// ====================
+function init() {
+    setupBootInput();
+    typeBootSequence();
+    input.focus();
+}
+
+init();

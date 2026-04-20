@@ -7,6 +7,45 @@ body {
     height: 100vh;
 }
 
+#screen-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: radial-gradient(
+        ellipse at center,
+        #050f08 0%,
+        #000000 100%
+    );
+    overflow: hidden;
+}
+
+#screen-wrapper::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    background: radial-gradient(
+        ellipse 135% 150% at center,
+        rgba(0, 0, 0, 0) 45%,
+        rgba(0, 0, 0, 0.65) 100%
+    );
+}
+
+#screen-wrapper::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.03),
+        rgba(0, 0, 0, 0.08) 2px,
+        rgba(0, 0, 0, 0.08) 4px
+    );
+}
+
 #terminal {
     position: relative;
     max-width: 70%;
@@ -14,8 +53,18 @@ body {
     padding: 20px;
     box-sizing: border-box;
     font: inherit;
-    margin-left: 5%;
+    margin-left: 13%;
     text-shadow: 0 0 8px rgba(57, 255, 20, 0.4);
+}
+
+#terminal-output {
+    position: absolute;
+    bottom: 90px;
+    right: 22px;
+    left: 20px;
+    padding-bottom: 6px;
+    font: inherit;
+    color: rgba(57, 255, 20, 0.5);
 }
 
 #terminal-input {
@@ -63,6 +112,62 @@ body {
     max-width: 100%;
     margin-top: 10px;
     border: 1px solid #39ff14;
+}
+
+#radio-overlay {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+
+    width: 320px;
+    padding: 12px;
+
+    background: rgba(0, 0, 0, 0.75);
+    border: 1px solid rgba(57, 255, 20, 0.4);
+
+    box-shadow: 0 0 15px rgba(57, 255, 20, 0.15);
+    backdrop-filter: blur(6px);
+
+    z-index: 9999;
+
+    font-family: inherit;
+    color: #39ff14;
+}
+
+#radio-overlay iframe {
+    width: 100%;
+    height: 180px;
+
+    border: 1px solid rgba(57, 255, 20, 0.3);
+    margin-top: 8px;
+}
+
+#radio-overlay button {
+    width: 100%;
+    margin-top: 8px;
+
+    background: transparent;
+    border: 1px solid rgba(57, 255, 20, 0.4);
+
+    color: #39ff14;
+    font-family: inherit;
+    font-size: 18px;
+
+    padding: 6px;
+    cursor: pointer;
+}
+
+#radio-overlay button:hover {
+    background: rgba(57, 255, 20, 0.1);
+}
+
+#radio-overlay::before {
+    content: "RADIO ACTIVE";
+    display: block;
+    margin-bottom: 6px;
+
+    font-size: 16px;
+    opacity: 0.7;
 }
 
 .option {

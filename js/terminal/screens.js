@@ -20,8 +20,8 @@ const screens = {
             "FALLOUT RADIO"
         ],
         options: {
-            "Diamond City Radio": "",
-            "Galaxy News Radio": "",
+            "diamond city radio": "radio_diamond",
+            "galaxy news radio": "radio_galaxy",
             "back": "main"
         }
     },
