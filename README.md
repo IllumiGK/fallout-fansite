@@ -1,5 +1,7 @@
 # Fallout-Inspired Interactive Terminal System
 
+![Fallout Terminal Demo](video/fallout-terminal-demo.gif)
+
 An interactive Fallout-themed terminal-style web application built using vanilla JavaScript. The project simulates a retro CLI interface with navigable screens, a custom command system, and an embedded radio player powered by the YouTube IFrame API.
 
 ---
@@ -36,11 +38,6 @@ An interactive Fallout-themed terminal-style web application built using vanilla
 
 ---
 
-## 📸 Preview
-
-(Add screenshot or short GIF of terminal + radio system here)
-
----
 
 ## 🎮 Concept
 
